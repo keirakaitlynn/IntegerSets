@@ -26,21 +26,33 @@ namespace IntegerSetLibrary
         public void InsertElement(int integerToInsert)
         {
             //  if "integerToInsert" isValid && NOT in "mSet"
-            if ((integerToInsert != -1) && (integerToInsert < SET_SIZE) && (mSet[integerToInsert] == false))
+            if (ValidEntry(integerToInsert))
             {
                 // add "integerToInsert" to "mSet"
                 mSet[integerToInsert] = true;
             }
         }
 
+        private bool ValidEntry(int integerValue)
+        {
+            // Check if the given integer value is in the range 0-100.
+            return integerValue >= 0 && integerValue < SET_SIZE;
+        }
+
         // TODO: DeleteElement()
         public void DeleteElement(int integerToDelete) { }
 
-        // TODO: Union()
-        public IntegerSet Union(IntegerSet integerSet)
+        // Union()
+        public IntegerSet Union(IntegerSet otherSet)
         {
-            IntegerSet temp = new IntegerSet();
-            return temp;
+            IntegerSet unionSet = new IntegerSet();
+            for (int i = 0; i < SET_SIZE; i++)
+            {
+                // If this mSet[i] is true or otherSet.mSet[i] is true,
+                // then make the unionSet.mSet[i] to be true as well.
+                unionSet.mSet[i] = (mSet[i] || otherSet.mSet[i]);
+            }
+            return unionSet;
         }
 
         // Intersection()
@@ -64,7 +76,7 @@ namespace IntegerSetLibrary
         }
 
         // ToString()
-        public override String ToString()
+        public override string ToString()
         {
             StringBuilder toString = new StringBuilder();
             toString.Append("{");

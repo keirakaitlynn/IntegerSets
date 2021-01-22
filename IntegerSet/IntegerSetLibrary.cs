@@ -22,10 +22,17 @@ namespace IntegerSetLibrary
             }
         }
 
+        // ValidEntry() is a helper method
+        private bool ValidEntry(int integerValue)
+        {
+            // Check if the given integer value is in the range 0-100.
+            return integerValue >= 0 && integerValue < SET_SIZE;
+        }
+
         // InsertElement()
         public void InsertElement(int integerToInsert)
         {
-            //  if "integerToInsert" isValid && NOT in "mSet"
+            //  if "integerToInsert" isValid
             if (ValidEntry(integerToInsert))
             {
                 // add "integerToInsert" to "mSet"
@@ -33,19 +40,22 @@ namespace IntegerSetLibrary
             }
         }
 
-        private bool ValidEntry(int integerValue)
+        // DeleteElement()
+        public void DeleteElement(int integerToDelete) 
         {
-            // Check if the given integer value is in the range 0-100.
-            return integerValue >= 0 && integerValue < SET_SIZE;
+            //  if "integerToDelete" isValid
+            if (ValidEntry(integerToDelete))
+            {
+                // remove "integerToDelete" from "mSet"
+                mSet[integerToDelete] = false;
+            }
         }
-
-        // TODO: DeleteElement()
-        public void DeleteElement(int integerToDelete) { }
 
         // Union()
         public IntegerSet Union(IntegerSet otherSet)
         {
             IntegerSet unionSet = new IntegerSet();
+
             for (int i = 0; i < SET_SIZE; i++)
             {
                 // If this mSet[i] is true or otherSet.mSet[i] is true,

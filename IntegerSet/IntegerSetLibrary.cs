@@ -78,11 +78,20 @@ namespace IntegerSetLibrary
             return intersection;
         }
 
-        // TODO: IsEqualTo()
-        public bool IsEqualTo(IntegerSet integerSet)
+        // IsEqualTo()
+        public bool IsEqualTo(IntegerSet otherSet)
         {
-            bool isEqualTo = false;
-            return isEqualTo;
+            bool bothEqual = false;
+
+            for (int i = 0; i < SET_SIZE; i++)
+            {
+                bothEqual = mSet[i] == otherSet.mSet[i];
+
+                if (!bothEqual)
+                    break;
+            }
+
+            return bothEqual;
         }
 
         // ToString()
@@ -99,7 +108,12 @@ namespace IntegerSetLibrary
                 }
             }
 
-            toString.Append(" }");
+            // Check if the set is empty.
+            if (toString.Length.Equals(1))
+                toString.Append("---}");
+            else
+                toString.Append(" }");
+
             return toString.ToString();
         }
     }
